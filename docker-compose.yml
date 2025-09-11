@@ -1,0 +1,30 @@
+version '3.8'
+
+services:
+	mysql:
+		image: mysql:8.0
+		container_name: blog-mysql
+		restart: always
+		environment:
+			MYSQL_ROOT_PASSWORD: root
+			MYSQL_DATABASE: springmvc_project
+			MYSQL_USER: root
+			MYSQL_PASSWORD: root
+		volumes:
+			- mysql_data:/var/lib/mysql
+		ports:
+			- "3306:3306"
+	
+	blogapp:
+		build: .
+		container_name: blog-app
+		restart: always
+		depends_on:
+			- mysql
+		ports:
+			- "8080:8080"
+		volumes:
+			- "./src/main/webapp/uploads:/usr/local/tomcat/webapps/ROOT/uploads"
+	
+volumes:
+	mysql_data:

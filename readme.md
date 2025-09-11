@@ -59,7 +59,18 @@ This project is focused on providing a secure and user-friendly blogging platfor
    cd SpringMVCBlogApp
    ```
    
-2. Update your MySQL database details in:
+2. Update your MySQL database details in `com.blogapp.config.JavaConfig.java`:
+	- replace with your details
+	
 	```
-	com.blogapp.config.JavaConfig.java
+		@Bean("dataSource")
+	public DataSource getDataSource() {
+		DriverManagerDataSource ds = new DriverManagerDataSource();
+
+		ds.setUrl("jdbc:mysql://localhost:3306/YOUR_DB_NAME");
+		ds.setUsername("YOUR_DB_USER");
+		ds.setPassword("YOUR_DB_PASS");
+		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		return ds;
+	}
 	```

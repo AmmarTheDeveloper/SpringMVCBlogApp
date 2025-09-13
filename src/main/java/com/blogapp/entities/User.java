@@ -1,7 +1,6 @@
 package com.blogapp.entities;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -53,6 +52,6 @@ public class User {
 	private LocalDateTime updatedAt;
 	
 	@OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-	List<Blog> blogs = new ArrayList<>(); // so no null pointer exceptions when accessing it
+	List<Blog> blogs; // so no null pointer exceptions when accessing it
 	
 }

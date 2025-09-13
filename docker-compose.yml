@@ -25,6 +25,11 @@ services:
 			- "8080:8080"
 		volumes:
 			- "./src/main/webapp/uploads:/usr/local/tomcat/webapps/ROOT/uploads"
+		environment:
+	      DB_HOST: mysql
+	      DB_USER: root
+	      DB_PASS: root
+	      DB_NAME: springmvc_project
 	
 volumes:
 	mysql_data:

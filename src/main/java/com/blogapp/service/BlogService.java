@@ -82,7 +82,7 @@ public class BlogService {
 	}
 
 	public String blogsPage(Model m, HttpSession session) {
-		List<Blog> blogsByUser = blogDao.getBlogsByUser((User) session.getAttribute("user"));
+		List<Blog> blogsByUser = blogDao.getBlogs();
 		m.addAttribute("blogs", blogsByUser);
 		return "blogs";
 	}

@@ -14,7 +14,6 @@ import org.springframework.validation.FieldError;
 import com.blogapp.dao.UserDao;
 import com.blogapp.dto.UserRegister;
 import com.blogapp.entities.User;
-import com.blogapp.entities.User.UserBuilder;
 import com.blogapp.utils.FileHandling;
 import com.blogapp.utils.ImageValidator;
 
@@ -72,13 +71,14 @@ public class RegisterService {
 				throw new Exception("Profile image not provided");
 			}
 			
-			UserBuilder new_user = new User().builder();
-			new_user.name(user.getName())
+			User userBuilder=User.builder()
+			.name(user.getName())
 			.email(user.getEmail())
 			.password(user.getPassword())
-			.profile(fileName);
+			.profile(fileName)
+			.build();
 			
-			userDao.insert(new_user.build());
+			userDao.insert(userBuilder);
 			
 			m.addAttribute("success","Your account has been created successfully");
 			m.addAttribute("userRegister", new UserRegister()); // clearing the form with new empty object

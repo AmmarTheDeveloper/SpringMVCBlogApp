@@ -12,12 +12,8 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import com.blogapp.entities.Blog;
-import com.blogapp.entities.User;
 
 @Configuration
 @EnableTransactionManagement // same as <tx:annotation-driven/>
@@ -35,11 +31,28 @@ public class JavaConfig {
 
 	@Bean("dataSource")
 	public DataSource getDataSource() {
+
+		String host = EnvConfig.getDbHost() != null ? EnvConfig.getDbHost() : System.getenv("DB_HOST");
+		String port = EnvConfig.getDbPort() != null ? EnvConfig.getDbPort() : System.getenv("DB_PORT");
+		String db = EnvConfig.getDb() != null ? EnvConfig.getDb() : System.getenv("DB_NAME");
+		String user = EnvConfig.getDbUser() != null ? EnvConfig.getDbUser() : System.getenv("DB_USER");
+		String pass = EnvConfig.getDbPass() != null ? EnvConfig.getDbPass() : System.getenv("DB_PASS");
+		
+		System.out.println(host);
+		System.out.println(port);
+		System.out.println(db);
+		System.out.println(user);
+		System.out.println(pass);
+		
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 
-		ds.setUrl("jdbc:mysql://localhost:3306/springmvc_project");
-		ds.setUsername("root");
-		ds.setPassword("root");
+		ds.setUrl("jdbc:mysql://" + host + ":" + port + "/" + db);
+		ds.setUsername(user);
+		ds.setPassword(pass);
+		/*
+		 * ds.setUrl("jdbc:mysql://localhost:3306/springmvc_project");
+		 * ds.setUsername("root"); ds.setPassword("root");
+		 */
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		return ds;
 	}
@@ -50,7 +63,7 @@ public class JavaConfig {
 		factory.setDataSource(getDataSource());
 		// instead of mentioning each class , i can use packageScan so it automatically
 		// creates bean from package through annotation
-		
+
 //		factory.setAnnotatedClasses(new Class[]{User.class,Blog.class});
 
 		factory.setPackagesToScan("com.blogapp.entities");
@@ -87,9 +100,7 @@ public class JavaConfig {
 		StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
 		return multipartResolver;
 	}
-	
-	
-	
+
 //	dispatcher servlet (front controller) is created by default by spring container but when we need to customize like setting the throw exception if no handler found to true
 // but it is deprecated so using by web initializer or web.xml
 //	@Bean("dispatcherServlet")

@@ -1,1 +1,14 @@
+# Maven build directory
 target/
+
+# Environment variables
+.env
+*.env
+src/main/resources/*.env
+
+# Eclipse/STS/IntelliJ IDEA project files
+.classpath
+.project
+.settings/
+.idea/
+*.iml

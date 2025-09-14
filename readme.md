@@ -74,3 +74,8 @@ This project is focused on providing a secure and user-friendly blogging platfor
 		return ds;
 	}
 	```
+	
+3. Set Environment variables in `src/main/resources/.env`
+	- for running in local
+	- for production just pass env variables through cmd or in the provider environments docker will use it
+	

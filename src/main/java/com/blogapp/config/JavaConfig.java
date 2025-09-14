@@ -32,11 +32,11 @@ public class JavaConfig {
 	@Bean("dataSource")
 	public DataSource getDataSource() {
 
-		String host = EnvConfig.getDbHost() != null ? EnvConfig.getDbHost() : System.getenv("DB_HOST");
-		String port = EnvConfig.getDbPort() != null ? EnvConfig.getDbPort() : System.getenv("DB_PORT");
-		String db = EnvConfig.getDb() != null ? EnvConfig.getDb() : System.getenv("DB_NAME");
-		String user = EnvConfig.getDbUser() != null ? EnvConfig.getDbUser() : System.getenv("DB_USER");
-		String pass = EnvConfig.getDbPass() != null ? EnvConfig.getDbPass() : System.getenv("DB_PASS");
+		String host = EnvConfig.getDbHost();
+		String port = EnvConfig.getDbPort();
+		String db = EnvConfig.getDb();
+		String user = EnvConfig.getDbUser();
+		String pass = EnvConfig.getDbPass();
 		
 		System.out.println(host);
 		System.out.println(port);
